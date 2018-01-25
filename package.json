@@ -7,6 +7,7 @@
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "client": "node ./src/client.js",
     "server": "NODE_CONFIG_DIR=./src/config/ node ./src/app.js",
+    "debug-server": "DEBUG=octokit:rest* NODE_CONFIG_DIR=./src/config/ nodemon ./src/app.js",    
     "lint": "eslint .",
     "test": "echo \"Not yet\" && exit 1"
   },
@@ -24,6 +25,7 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.5.1"
+    "eslint-plugin-react": "^7.5.1",
+    "nodemon": "^1.14.11"
   }
 }
