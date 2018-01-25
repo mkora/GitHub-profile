@@ -1,16 +1,29 @@
 {
   "name": "github-profile-graphs",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.1.0"
-  },
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
   "scripts": {
-    "start": "NODE_PATH=src:src/components/:src/containers react-scripts start",
-    "build": "NODE_PATH=src:src/components/:src/containers react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "node ./src/client.js",
+    "server": "NODE_CONFIG_DIR=./src/config/ node ./src/app.js",
+    "lint": "eslint .",
+    "test": "echo \"Not yet\" && exit 1"
+  },
+  "author": "mkora",
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/rest": "^14.0.5",
+    "body-parser": "^1.18.2",
+    "config": "^1.29.2",
+    "express": "~4.16.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1"
   }
 }

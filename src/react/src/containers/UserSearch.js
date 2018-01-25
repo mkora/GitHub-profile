@@ -17,7 +17,7 @@ class UserSearch extends Component {
     if (this.state.username) { // TODO: additional validation 
       this.props.onUsernameSearch(this.state.username);
       this.setState({
-        username: ''
+        username: '' // TODO: ???
       });
     }
   }
