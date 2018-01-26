@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('config');
-
+const errorHandler = require('./util/errorHandler');
 const github = require('@octokit/rest')();
 
 const app = express();
@@ -42,25 +42,52 @@ app.get('/api/user/:username', async (req, res, next) => {
   try {
     await github.authenticate({
       type: 'oauth',
-      token: config.get('GITHUB_ACCESS_TOKEN'),
+      token,
     });
 
     const { meta, data } = await github.users.getForUser({ username });
-
     const repos = await paginate(github.repos.getForUser, { username });
-
+    const activity = {};
     try {
       const repoStats = await Promise.all(repos.map(async (repo) => {
-        const langs = await github.repos.getLanguages({
-          owner: username,
-          repo: repo.name,
-          per_page: 100
+        const [
+          langs,
+          contributors,
+          commitActivity,
+        ] = await Promise.all([
+          github.repos.getLanguages({
+            owner: username,
+            repo: repo.name,
+            per_page: 100
+          }),
+          github.repos.getStatsContributors({
+            owner: username,
+            repo: repo.name
+          }),
+          github.repos.getStatsCommitActivity({
+            owner: username,
+            repo: repo.name
+          })
+        ]);
+
+        const commits = Array
+          .from(contributors.data)
+          .reduce((soFar, v) => (soFar + v.total), 0);
+
+        Array.from(commitActivity.data).forEach((v) => {
+          if (activity[v.week] === undefined) {
+            activity[v.week] = Array(7).fill(0);
+          }
+          activity[v.week] = v.days
+            .map((num, day) => activity[v.week][day] + num);
         });
+
         return {
           name: repo.name,
           description: repo.description,
           stars: repo.stargazers_count,
-          languages: langs.data
+          commits,
+          languages: langs.data,
         };
       }));
 
@@ -72,30 +99,25 @@ app.get('/api/user/:username', async (req, res, next) => {
         },
         user: {
           login: data.login,
-          name: data.name,
-          github_url: data.url,
-          avatar_url: data.avatar_url,
-          since: data.created_at,
+          realname: data.name,
+          profileUrl: data.url,
+          avatarUrl: data.avatar_url,
+          memberSince: data.created_at,
           company: data.company,
           location: data.location,
-          repos_number: data.public_repos
+          reposNumber: data.public_repos,
         },
-        repos: repoStats
+        repos: repoStats,
+        activity,
       });
     } catch (err) {
-      res.status(err.code);
-      return res.json({
-        message: err.message
-      });
+      res.status(err.code || 500);
+      const message = errorHandler(err);
+      return res.json(message);
     }
   } catch (err) {
     res.status(err.code);
-    let message;
-    try {
-      message = JSON.parse(err.message);
-    } catch (e) {
-      message = { message: err.message };
-    }
+    const message = errorHandler(err);
     return res.json(message);
   }
 });
