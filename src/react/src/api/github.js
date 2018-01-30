@@ -8,12 +8,12 @@ export default async function githab(username) {
       return data;
     }
     data = await axios.get(`/api/user/${username}`);
-    const result = miss(username, data);
+    const result = miss(username, data.data);
     if (result !== false) {
-      return Promise.resolve(data);
+      return Promise.resolve(data.data);
     }
-    return Promise.reject(data);
+    return Promise.reject(data.data);
   } catch (error) {
-    return Promise.reject(error);
+    return Promise.reject(error.response);
   }
 }

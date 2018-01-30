@@ -1,9 +1,11 @@
 {
   "extends": "./node_modules/eslint-config-airbnb/.eslintrc",
   "rules": {
-    "react/jsx-filename-extension": [1, { 
+    "react/jsx-filename-extension": ["warn", { 
         "extensions": [".js", ".jsx"] 
       }
-    ]
+    ],
+    "import/no-extraneous-dependencies": "off"
   }
+
 }
