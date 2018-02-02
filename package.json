@@ -14,9 +14,6 @@
   "author": "mkora",
   "license": "ISC",
   "dependencies": {
-    "@nivo/bar": "^0.33.0",
-    "@nivo/calendar": "^0.33.0",
-    "@nivo/line": "^0.33.0",
     "@octokit/rest": "^14.0.5",
     "body-parser": "^1.18.2",
     "config": "^1.29.2",
