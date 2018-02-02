@@ -10,7 +10,6 @@
 /build
 
 # misc
-# misc
 .DS_Store
 .env.local
 .env.development.local
@@ -25,4 +24,3 @@
 chrome-user-data
 *.sublime-project
 *.sublime-workspace
-CRA-README.md
