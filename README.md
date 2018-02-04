@@ -1,4 +1,4 @@
-# GitHub user profile statistics
+# GitHub User Profile Statistics
 
 ## Overview
 
@@ -6,9 +6,9 @@ What is it?
 
 ## Notes
 
-- What is special about it? 
+- What is special about it?
 
-- What do you use? 
+- What modules were used?
 
 - Add links to API documentation
 
@@ -19,7 +19,7 @@ What is it?
 npm install
 ```
 
-2. Run the app (with default settings)
+2. Run the app (with default settings, what env vars can be used)
 ```
 npm start
 ```
