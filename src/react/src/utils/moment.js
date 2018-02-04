@@ -1,18 +1,30 @@
 import moment from 'moment';
 
-const formattedMonth = timestamp =>
+const formatMonth = timestamp =>
   moment
     .unix(timestamp)
     .format('MMM');
 
-const formattedNextMonth = fromTimestamp =>
+const formatNextMonth = fromTimestamp =>
   moment
     .unix(fromTimestamp)
     .clone()
     .add(7, 'days')
     .format('MMM');
 
-const slitedWeeks = (timestamp, vals) => {
+const formatCalendarDate = timestamp =>
+  moment
+    .unix(timestamp)
+    .format('YYYY-MM-DD');
+
+const formatAddedCalendarDate = (fromTimestamp, nth) =>
+  moment
+    .unix(fromTimestamp)
+    .clone()
+    .add(nth, 'days')
+    .format('YYYY-MM-DD');
+
+const sliceWeekData = (timestamp, vals) => {
   const current = moment
     .unix(timestamp);
   const next = current
@@ -43,7 +55,9 @@ const slitedWeeks = (timestamp, vals) => {
 };
 
 export {
-  slitedWeeks,
-  formattedMonth,
-  formattedNextMonth
+  sliceWeekData,
+  formatMonth,
+  formatNextMonth,
+  formatCalendarDate,
+  formatAddedCalendarDate
 };
