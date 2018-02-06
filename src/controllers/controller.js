@@ -26,7 +26,7 @@ const paginate = async (method, params = {}) => {
 };
 
 
-const reposInfo = async (username, repo = {}) => {
+const getReposInfo = async (username, repo = {}) => {
   if (repo.name === undefined) {
     const msg = 'Cant find repo to extract';
     logger.error(msg, repo);
@@ -87,7 +87,7 @@ module.exports.run = async (req) => {
 
   const info = await Promise.all(repos.map(async (repo, i) => {
     logger.debug('Found repository #%d', (i + 1), repo);
-    return reposInfo(username, repo);
+    return getReposInfo(username, repo);
   }));
   logger.debug('Returned repos data', info);
 
