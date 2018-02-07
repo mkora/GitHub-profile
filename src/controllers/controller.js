@@ -1,5 +1,6 @@
 const config = require('config');
 const logger = require('../util/logger');
+const moment = require('moment');
 const github = require('@octokit/rest')();
 
 const checkToken = () => {
@@ -25,7 +26,6 @@ const paginate = async (method, params = {}) => {
   return data;
 };
 
-
 const getReposInfo = async (username, repo = {}) => {
   if (repo.name === undefined) {
     const msg = 'Cant find repo to extract';
@@ -44,16 +44,17 @@ const getReposInfo = async (username, repo = {}) => {
   const langs = await github.repos.getLanguages({ ...params });
   logger.debug('Call repos.getLanguages(%s)', repo.name, langs);
 
+  // @todo deal with 202
   const contributors = await github.repos.getStatsContributors({ ...params });
   logger.debug('Call repos.getStatsContributors(%s)', repo.name, contributors);
 
+  // @todo deal with 202
   const activity = await github.repos.getStatsCommitActivity({ ...params });
   logger.debug('Call repos.getStatsCommitActivity(%s)', repo.name, activity);
 
   const commits = Array
     .from(contributors.data)
-    .reduce((soFar, v) => (soFar + v.total), 0);
-
+    .reduce((soFar, v) => (soFar + v.total), 0); // day light savings offset doesn't metter
   return {
     stats: {
       name: repo.name,
@@ -65,7 +66,6 @@ const getReposInfo = async (username, repo = {}) => {
     activity: activity.data,
   };
 };
-
 
 module.exports.run = async (req) => {
   const { username } = req.params;
@@ -98,12 +98,17 @@ module.exports.run = async (req) => {
     const { stats, activity } = item;
     repoStats[stats.name] = stats;
 
-    activity.forEach((v) => {
-      if (reposActivity[v.week] === undefined) {
-        reposActivity[v.week] = Array(7).fill(0);
+    Array.from(activity).forEach((v) => {
+      const date = moment
+        .unix(v.week)
+        .startOf('date')
+        .unix();
+      if (reposActivity[date] === undefined) {
+        reposActivity[date] = Array(7).fill(0);
       }
-      reposActivity[v.week] = v.days
-        .map((num, day) => reposActivity[v.week][day] + num);
+      // timezone & day light savings offset does metter
+      reposActivity[date] = v.days
+        .map((num, day) => reposActivity[date][day] + num);
     });
   });
   logger.debug('Summed activity data from all repos ', reposActivity);
