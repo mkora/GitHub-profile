@@ -6,6 +6,7 @@ import UserSearch from 'UserSearch';
 import UserInfo from 'UserInfo';
 import ErrorNotification from 'ErrorNotification';
 import RateLimit from 'RateLimit';
+import UserActivity from 'UserActivity';
 
 class Statistics extends Component {
 
@@ -52,8 +53,7 @@ class Statistics extends Component {
       });
     }
 
-  }  
-
+  }
 
   render() {
     const isProfileRecieved = this.state.username !== ''
@@ -65,12 +65,21 @@ class Statistics extends Component {
       username: this.state.username,
     };
 
+    if (isError) {
+      return (
+        <div>
+          <ErrorNotification {...this.state.error} />
+        </div>
+      );      
+    }
+
     if (isProfileRecieved) {
       return (
         <div>
-          {!isError && <UserInfo {...profile} />}
-          {!isError && <RateLimit {...this.state.ratelimit} />}
-          {isError && <ErrorNotification {...this.state.error} />}
+          <UserInfo {...profile} />
+          <UserActivity data={this.state.activity} />
+
+          <RateLimit {...this.state.ratelimit} />
         </div>
       );
     }
