@@ -33,17 +33,15 @@ const ChartCalendar = (props) => {
         monthLegendOffset={10}
         dayBorderWidth={2}
         dayBorderColor="#ffffff"
-        legends={[
-          {
-            anchor: 'bottom-right',
-            direction: 'row',
-            translateY: 36,
-            itemCount: 5,
-            itemWidth: 30,
-            itemHeight: 30,
-            itemDirection: 'top-to-bottom'
-          }
-        ]}
+        legends={[{
+          anchor: 'bottom-right',
+          direction: 'row',
+          translateY: 36,
+          itemCount: 5,
+          itemWidth: 30,
+          itemHeight: 30,
+          itemDirection: 'top-to-bottom'
+        }]}
       />
     </div>
   );

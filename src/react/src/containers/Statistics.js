@@ -6,7 +6,8 @@ import UserSearch from 'UserSearch';
 import UserInfo from 'UserInfo';
 import ErrorNotification from 'ErrorNotification';
 import RateLimit from 'RateLimit';
-import UserActivity from 'UserActivity';
+import UserActivityStatistics from 'UserActivityStatistics';
+import LanguageStatistics from 'LanguageStatistics';
 
 class Statistics extends Component {
 
@@ -30,8 +31,6 @@ class Statistics extends Component {
           repos,
           activity
         } = data;
-
-        // calc
         this.setState({
           username,
           ratelimit,
@@ -77,7 +76,8 @@ class Statistics extends Component {
       return (
         <div>
           <UserInfo {...profile} />
-          <UserActivity data={this.state.activity} />
+          <UserActivityStatistics data={this.state.activity} />
+          <LanguageStatistics repos={this.state.repos}/>
 
           <RateLimit {...this.state.ratelimit} />
         </div>
