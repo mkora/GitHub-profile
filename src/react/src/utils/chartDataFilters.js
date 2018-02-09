@@ -84,52 +84,6 @@ export const calendaredData = (data) => {
 };
 
 export const piedData = (data) => {
-
-  console.log(data);
-
-
   return [
-    {
-      "id": "python",
-      "label": "python",
-      "value": 125,
-      "color": "hsl(239, 70%, 50%)"
-    },
-    {
-      "id": "erlang",
-      "label": "erlang",
-      "value": 551,
-      "color": "hsl(132, 70%, 50%)"
-    },
-    {
-      "id": "scala",
-      "label": "scala",
-      "value": 282,
-      "color": "hsl(84, 70%, 50%)"
-    },
-    {
-      "id": "haskell",
-      "label": "haskell",
-      "value": 50,
-      "color": "hsl(49, 70%, 50%)"
-    },
-    {
-      "id": "javascript",
-      "label": "javascript",
-      "value": 308,
-      "color": "hsl(292, 70%, 50%)"
-    },
-    {
-      "id": "make",
-      "label": "make",
-      "value": 313,
-      "color": "hsl(313, 70%, 50%)"
-    },
-    {
-      "id": "go",
-      "label": "go",
-      "value": 525,
-      "color": "hsl(250, 70%, 50%)"
-    }
   ];
 };
