@@ -77,7 +77,7 @@ class Statistics extends Component {
         <div>
           <UserInfo {...profile} />
           <UserActivityStatistics data={this.state.activity} />
-          <LanguageStatistics repos={this.state.repos}/>
+          <LanguageStatistics data={this.state.repos}/>
 
           <RateLimit {...this.state.ratelimit} />
         </div>

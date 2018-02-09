@@ -84,6 +84,32 @@ export const calendaredData = (data) => {
 };
 
 export const piedData = (data) => {
-  return [
-  ];
+  const langs = {};
+  Object.keys(data).forEach((repoName) => {
+    const repo = data[repoName];
+    Object.keys(repo.languages).forEach((lang) => {
+      if (langs[lang] === undefined) {
+        langs[lang] = {
+          id: lang,
+          label: lang,
+          value: 0,
+        };
+      }
+      langs[lang].value += repo.languages[lang];
+    });
+  });
+
+  // count others
+  const values = Object.values(langs);
+  if (values.length > 5) {
+    values.sort((a, b) => b.value - a.value);
+    values.push({
+      id: 'Others',
+      label: 'Others',
+      value: values
+        .splice(5)
+        .reduce((soFar, v) => soFar + v.value, 0)
+    });
+  }
+  return values;
 };

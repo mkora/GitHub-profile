@@ -15,7 +15,6 @@ const ChartPie = (props) => {
           bottom: 80,
           left: 80
         }}
-        sortByValue={true}
         innerRadius={0.5}
         padAngle={1}
         cornerRadius={3}

@@ -18,6 +18,7 @@ class LanguageStatistics extends Component {
 
     return (
       <div style={{ clear: 'both'}}>
+        <p>Languages per Lines</p>
         <ChartPie data={piedData(data)} />
       </div>
     );
