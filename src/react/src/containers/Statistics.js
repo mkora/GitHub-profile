@@ -7,7 +7,7 @@ import UserInfo from 'UserInfo';
 import ErrorNotification from 'ErrorNotification';
 import RateLimit from 'RateLimit';
 import UserActivityStatistics from 'UserActivityStatistics';
-import LanguageStatistics from 'LanguageStatistics';
+import RepoStatistics from 'RepoStatistics';
 
 class Statistics extends Component {
 
@@ -77,7 +77,7 @@ class Statistics extends Component {
         <div>
           <UserInfo {...profile} />
           <UserActivityStatistics data={this.state.activity} />
-          <LanguageStatistics data={this.state.repos}/>
+          <RepoStatistics data={this.state.repos}/>
 
           <RateLimit {...this.state.ratelimit} />
         </div>

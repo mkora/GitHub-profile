@@ -83,10 +83,21 @@ export const calendaredData = (data) => {
   return activity;
 };
 
-export const piedData = (data) => {
+export const langPiedData = (data, type = 'byte') => {
+  const types = [
+    'byte',
+    'repo',
+    'star',
+    'commit'
+  ];
+  if (!types.includes(type)) {
+    return [];
+  }
+
   const langs = {};
   Object.keys(data).forEach((repoName) => {
     const repo = data[repoName];
+
     Object.keys(repo.languages).forEach((lang) => {
       if (langs[lang] === undefined) {
         langs[lang] = {
@@ -95,7 +106,21 @@ export const piedData = (data) => {
           value: 0,
         };
       }
-      langs[lang].value += repo.languages[lang];
+
+      switch (type) { // eslint-disable-line default-case
+        case 'byte':
+          langs[lang].value += repo.languages[lang];
+          break;
+        case 'repo':
+          langs[lang].value += 1;
+          break;
+        case 'star':
+          langs[lang].value += repo.stars;
+          break;
+        case 'commit':
+          langs[lang].value += repo.commits;
+          break;
+      }
     });
   });
 
