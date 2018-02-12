@@ -15,7 +15,7 @@ class UserActivityStatistics extends Component {
   };
 
   state = {
-    isLineChart: false,
+    isLineChart: true,
   }
 
   handleSwitchClick = (e) => {
@@ -29,22 +29,22 @@ class UserActivityStatistics extends Component {
   render() {
     const { data } = this.props;
 
-    if (Object.keys(data).length === 0) {
-      return (
-        <div>Commits activity not found. Try again later.</div>
-      );
-    }
-
     return (
       <div style={{ clear: 'both'}}>
         <input type="button" onClick={this.handleSwitchClick} value="Switch view" />
         {
           this.state.isLineChart &&
-          <ChartLine data={linedData(data)} />
+          <ChartLine
+            title="User Activity"
+            data={linedData(data)}
+          />
         }
         {
           (!this.state.isLineChart) &&
-          <ChartCalendar data={calendaredData(data)} />
+          <ChartCalendar
+            title="User Activity"
+            data={calendaredData(data)}
+          />
         }
       </div>
     );

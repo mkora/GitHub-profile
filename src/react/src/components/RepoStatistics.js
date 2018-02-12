@@ -1,7 +1,7 @@
 import React, { Component }  from 'react';
 import PropTypes from 'prop-types';
 import ChartPie from 'ChartPie';
-import { langPiedData } from '../utils/chartDataFilters';
+import { langPiedData, repoPiedData } from '../utils/chartDataFilters';
 
 class RepoStatistics extends Component {
 
@@ -20,23 +20,43 @@ class RepoStatistics extends Component {
       <div style={{ clear: 'both'}}>
         <div style={{ clear: 'both'}}>
           <div style={{ float: 'left', width: '33.3%' }}>
-            <p>Bytes per Languages</p>
-            <ChartPie data={langPiedData(data, 'byte')} />
+            <ChartPie
+              title="Bytes per Language"
+              data={langPiedData(data, 'byte')}
+            />
           </div>
           <div style={{ float: 'left', width: '33.3%' }}>
-            <p>Repos per Languages</p>
-            <ChartPie data={langPiedData(data, 'repo')} />
+            <ChartPie
+              title="Repos per Language"
+              data={langPiedData(data, 'repo')}
+            />
           </div>
           <div style={{ float: 'left', width: '33.3%' }}>
-            <p>Stars per Languages</p>
-            <ChartPie data={langPiedData(data, 'star')} />
+            <ChartPie
+              title="Stars per Language"
+              data={langPiedData(data, 'star')}
+            />
           </div>          
         </div>
         <div style={{ clear: 'both'}}>
           <div style={{ float: 'left', width: '33.3%' }}>
-            <p>Commits per Languages</p>
-            <ChartPie data={langPiedData(data, 'commit')} />
-          </div> 
+            <ChartPie
+              title="Commits per Language"
+              data={langPiedData(data, 'commit')}
+            />
+          </div>
+          <div style={{ float: 'left', width: '33.3%' }}>
+            <ChartPie
+              title="Commits per Repo" 
+              data={repoPiedData(data, 'commit')}
+            />
+          </div>
+          <div style={{ float: 'left', width: '33.3%' }}>
+            <ChartPie
+              title="Stars per Repo"
+              data={repoPiedData(data, 'star')}
+            />
+          </div>          
         </div>
       </div>
     );

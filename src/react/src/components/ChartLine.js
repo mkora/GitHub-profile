@@ -3,15 +3,21 @@ import PropTypes from 'prop-types';
 import { ResponsiveLine } from '@nivo/line';
 
 const ChartLine = (props) => {
-  const data = [{
-    id: 'commits',
-    data: props.data
-  }];
+  const { data, title } = props;
+  if (data.length === 0) {
+    return (
+      <div>{title} data not found. Please, try again later.</div>
+    );
+  }
 
   return (
     <div style={{ height: 250 }}>
       <ResponsiveLine
-        data={data}
+        data={[
+        {
+          id: 'commits',
+          data: props.data
+        }]}
         margin={{
           top: 50,
           right: 50,

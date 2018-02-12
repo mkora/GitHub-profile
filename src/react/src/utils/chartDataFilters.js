@@ -84,15 +84,21 @@ export const calendaredData = (data) => {
 };
 
 export const langPiedData = (data, type = 'byte') => {
-  const types = [
-    'byte',
-    'repo',
-    'star',
-    'commit'
-  ];
-  if (!types.includes(type)) {
-    return [];
-  }
+  const getValue = (type, lang, repo) => {
+    if (type === 'byte') {
+      return repo.languages[lang];
+    }
+    if (type === 'repo') {
+      return 1;
+    }
+    if (type === 'star') {
+      return repo.stars;
+    }
+    if (type === 'commit') {
+      return repo.commits;
+    }
+    return undefined;
+  };
 
   const langs = {};
   Object.keys(data).forEach((repoName) => {
@@ -106,33 +112,63 @@ export const langPiedData = (data, type = 'byte') => {
           value: 0,
         };
       }
-
-      switch (type) { // eslint-disable-line default-case
-        case 'byte':
-          langs[lang].value += repo.languages[lang];
-          break;
-        case 'repo':
-          langs[lang].value += 1;
-          break;
-        case 'star':
-          langs[lang].value += repo.stars;
-          break;
-        case 'commit':
-          langs[lang].value += repo.commits;
-          break;
+      const val = getValue(type, lang, repo);
+      if (val === undefined) {
+        throw new Error(`Cannot find value typeof ${type} in '${repoName}'`);
       }
+      langs[lang].value += val;
     });
   });
 
   // count others
+  const limit = 5;
   const values = Object.values(langs);
-  if (values.length > 5) {
+  if (values.length > limit) {
     values.sort((a, b) => b.value - a.value);
     values.push({
       id: 'Others',
       label: 'Others',
       value: values
-        .splice(5)
+        .splice(limit)
+        .reduce((soFar, v) => soFar + v.value, 0)
+    });
+  }
+  return values;
+};
+
+export const repoPiedData = (data, type = 'star') => {
+  const getValue = (type, repo) => {
+    if (type === 'star') {
+      return repo.stars;
+    }
+    if (type === 'commit') {
+      return repo.commits;
+    }
+    return undefined;
+  };
+
+  const values = [];
+  Object.keys(data).forEach((repoName) => {
+    const repo = data[repoName];
+    const val = getValue(type, repo);
+    if (val === undefined) {
+      throw new Error(`Cannot find value typeof ${type} in '${repoName}'`);
+    }
+    values.push({
+      id: repoName,
+      label: repoName,
+      value: val,
+    });
+  });
+
+  const limit = 7;
+  if (values.length > limit) {
+    values.sort((a, b) => b.value - a.value);
+    values.push({
+      id: 'Others',
+      label: 'Others',
+      value: values
+        .splice(limit)
         .reduce((soFar, v) => soFar + v.value, 0)
     });
   }
