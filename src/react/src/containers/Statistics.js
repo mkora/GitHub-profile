@@ -20,7 +20,10 @@ const styles = theme => ({
   root: {
     textAlign: 'center',
     paddingTop: theme.spacing.unit * 20,
-  },
+  },  
+  profile: {
+    paddingTop: theme.spacing.unit,
+  },  
 });
 
 class Statistics extends Component {
@@ -77,7 +80,7 @@ class Statistics extends Component {
       username: this.state.username,
     };
 
-    if (isError) {
+    if (isError) {     
       return (
         <div className={classes.root}>
           <ErrorNotification {...this.state.error} />
@@ -87,7 +90,7 @@ class Statistics extends Component {
 
     if (isProfileRecieved) {
       return (
-        <div className={classes.root}>
+        <div className={classes.profile}>
           <UserInfo {...profile} />
           <UserActivityStatistics data={this.state.activity} />
           <RepoStatistics data={this.state.repos}/>
