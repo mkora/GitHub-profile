@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import github from '../api/github'
 
-import '../css/Statistics.css';
-import UserSearch from 'UserSearch';
-import UserInfo from 'UserInfo';
-import ErrorNotification from 'ErrorNotification';
-import RateLimit from 'RateLimit';
-import UserActivityStatistics from 'UserActivityStatistics';
-import RepoStatistics from 'RepoStatistics';
+import UserSearch from './UserSearch';
+import UserInfo from '../components/UserInfo';
+import ErrorNotification from '../components/ErrorNotification';
+import RateLimit from '../components/RateLimit';
+import UserActivityStatistics from './UserActivityStatistics';
+import RepoStatistics from '../components/RepoStatistics';
+
+import 'material-design-icons'; // ?
+import 'typeface-roboto';
+import { withStyles } from 'material-ui/styles';
+
+import withRoot from '../withRoot';
+
+const styles = theme => ({
+  root: {
+    textAlign: 'center',
+    paddingTop: theme.spacing.unit * 20,
+  },
+});
 
 class Statistics extends Component {
 
@@ -44,17 +58,16 @@ class Statistics extends Component {
           error: { message: 'Unknown error' }
         });
       }
-
     } catch (error) {
       this.setState({
         username,
         error: error.data
       });
     }
-
   }
 
   render() {
+    const { classes } = this.props;
     const isProfileRecieved = this.state.username !== ''
       && this.state.profileUrl !== '';
     const isError = this.state.error
@@ -66,7 +79,7 @@ class Statistics extends Component {
 
     if (isError) {
       return (
-        <div>
+        <div className={classes.root}>
           <ErrorNotification {...this.state.error} />
         </div>
       );      
@@ -74,7 +87,7 @@ class Statistics extends Component {
 
     if (isProfileRecieved) {
       return (
-        <div>
+        <div className={classes.root}>
           <UserInfo {...profile} />
           <UserActivityStatistics data={this.state.activity} />
           <RepoStatistics data={this.state.repos}/>
@@ -85,14 +98,18 @@ class Statistics extends Component {
     }
 
     return (
-      <div>
+      <div className={classes.root}>
         <UserSearch 
           username={this.state.username} 
-          onUsernameSearch={this.handleUsernameSearch} />
+          onUsernameSearch={this.handleUsernameSearch} 
+        />
       </div>
     );
   }
-
 }
 
-export default Statistics;
+Statistics.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withRoot(withStyles(styles)(Statistics));
