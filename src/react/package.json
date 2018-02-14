@@ -7,15 +7,17 @@
     "@nivo/line": "^0.33.0",
     "@nivo/pie": "^0.33.0",
     "axios": "^0.17.1",
-    "material-ui": "^0.20.0",
+    "material-design-icons": "^3.0.1",
+    "material-ui": "^1.0.0-beta.33",    
     "moment": "^2.20.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.0"
+    "react-scripts": "1.1.0",
+    "typeface-roboto": "0.0.54"
   },
   "scripts": {
-    "start": "NODE_PATH=src:src/components/:src/containers react-scripts start",
-    "build": "NODE_PATH=src:src/components/:src/containers react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
