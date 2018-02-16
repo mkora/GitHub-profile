@@ -5,6 +5,8 @@ import Button from 'material-ui/Button';
 
 const ErrorNotification = (props) => {
   /* eslint-disable indent */
+  /* eslint-disable react/jsx-indent-props */
+  /* eslint-disable react/jsx-indent */
   const { message } = props;
   const text = `Reason: ${message}
     ${(props.documentation_url)
@@ -20,18 +22,20 @@ const ErrorNotification = (props) => {
   return (
     <div>
       {(message === 'Not Found')
-        ? <Typography
+      ? <Typography
           color="secondary"
           noWrap
           paragraph
-          variant="button">
+          variant="button"
+        >
           User not found<Button color="primary" href="./">Go home</Button>
         </Typography>
-        : <Typography
+      : <Typography
           color="primary"
           noWrap
           paragraph
-          variant="title">
+          variant="title"
+        >
           Oops! Something went wrong. Please, try again later
         </Typography>
       }
