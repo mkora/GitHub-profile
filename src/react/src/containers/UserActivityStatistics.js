@@ -1,19 +1,36 @@
 import React, { Component }  from 'react';
 import PropTypes from 'prop-types';
-import ChartLine from 'ChartLine';
-import ChartCalendar from 'ChartCalendar';
+
+import { withStyles } from 'material-ui/styles';
+import Card, { CardHeader, CardContent } from 'material-ui/Card';
+import IconButton from 'material-ui/IconButton';
+import TodayIcon from 'material-ui-icons/Today';
+import TimelineIcon from 'material-ui-icons/Timeline';
+
+import ChartLine from '../components/ChartLine';
+import ChartCalendar from '../components/ChartCalendar';
 import { linedData, calendaredData } from '../utils/chartDataFilters'
 
+const styles = theme => ({
+  title: {
+    fontSize: '0.875rem',
+    fontWeight: 500
+  },
+  card: {
+    height: '100%',
+  },
+  cardHeader: {
+    paddingBottom: 0,
+  },
+  cardContent: {
+    paddingTop: 0,
+  },
+  icon: {
+    marginRight: theme.spacing.unit,
+  },
+});
+
 class UserActivityStatistics extends Component {
-
-  static propTypes = {
-//  data: PropTypes.string.isRequired,
-  };
-    
-  static defaultProps = {
-//  data: '',
-  };
-
   state = {
     isLineChart: true,
   }
@@ -27,29 +44,65 @@ class UserActivityStatistics extends Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { classes, data } = this.props;
 
     return (
-      <div style={{ clear: 'both'}}>
-        <input type="button" onClick={this.handleSwitchClick} value="Switch view" />
-        {
-          this.state.isLineChart &&
-          <ChartLine
-            title="User Activity"
-            data={linedData(data)}
-          />
-        }
-        {
-          (!this.state.isLineChart) &&
-          <ChartCalendar
-            title="User Activity"
-            data={calendaredData(data)}
-          />
-        }
-      </div>
+      <Card className={classes.card}>
+        <CardHeader
+          className={classes.cardHeader}
+          title={
+            <span className={classes.title}>
+              Contributions in the last year
+            </span>
+          }
+          action={
+            <IconButton
+              className={classes.icon}
+              aria-label={`Switch to ${this.state.isLineChart
+                ? 'chart' : 'calendar'} view`}
+              onClick={this.handleSwitchClick}
+            >
+            {
+              this.state.isLineChart &&
+                <TodayIcon
+                  color="action"
+                  titleAccess="Switch to calendar view"
+                />
+            }
+            {
+              !this.state.isLineChart &&
+                <TimelineIcon
+                  color="action"
+                  titleAccess="Switch to activity chart"
+                />
+            }
+            </IconButton>
+          }
+        />
+        <CardContent className={classes.cardContent}>
+          {
+            this.state.isLineChart &&
+            <ChartLine
+              title="User Activity"
+              data={linedData(data)}
+            />
+          }
+          {
+            (!this.state.isLineChart) &&
+            <ChartCalendar
+              title="User Activity"
+              data={calendaredData(data)}
+            />
+          }
+        </CardContent>
+      </Card>
     );
   }
-
 };
 
-export default UserActivityStatistics;
+UserActivityStatistics.propTypes = {
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(UserActivityStatistics);
