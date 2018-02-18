@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 
-import { FormGroup } from 'material-ui/Form'
-import Typography from 'material-ui/Typography'
+import { FormGroup, FormHelperText } from 'material-ui/Form'
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { CircularProgress } from 'material-ui/Progress';
 
 const styles = theme => ({
   textField: {
-    marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 300,
   },
@@ -37,7 +35,8 @@ class UserSearch extends Component {
   };
 
   validateUsername = (str) =>
-    RegExp('^[a-z0-9](?:[a-z0-9]|-(?=[a-z0-9])){0,38}$', 'i').test(str);
+    RegExp('^[a-z0-9](?:[a-z0-9]|-(?=[a-z0-9])){0,38}$', 'i')
+      .test(str);
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -80,18 +79,15 @@ class UserSearch extends Component {
             value={this.state.username}
           />
           {hasError &&
-            <Typography
-              align="center"
-              color="error"
-              noWrap
-              variant="body1">
+            <FormHelperText error={hasError}>
               {this.state.error}
-            </Typography>
+            </FormHelperText>
           }
           </div>
           <Button
             color="primary"
-            type="submit">
+            type="submit"
+          >
             Search
           </Button>
         </FormGroup>
