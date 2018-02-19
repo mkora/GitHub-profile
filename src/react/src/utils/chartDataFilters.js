@@ -144,6 +144,10 @@ export const repoPiedData = (data, type = 'star') => {
     if (type === 'commit') {
       return repo.commits;
     }
+    if (type === 'byte') {
+      return Object.keys(repo.languages)
+        .reduce((soFar, k) => repo.languages[k], 0);
+    }
     return undefined;
   };
 
