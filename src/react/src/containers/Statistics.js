@@ -5,7 +5,7 @@ import github from '../api/github'
 
 import UserSearch from './UserSearch';
 import UserInfo from '../components/UserInfo';
-import ErrorNotification from '../components/ErrorNotification';
+import NotificationError from '../components/NotificationError';
 import RateLimit from '../components/RateLimit';
 import UserActivityStatistics from './UserActivityStatistics';
 import RepoStatistics from '../components/RepoStatistics';
@@ -71,6 +71,13 @@ class Statistics extends Component {
     }
   }
 
+  /**
+   * TODO
+   */
+  handleRefreshButton = (event) => {
+    console.log('Refresh');
+  }
+
   render() {
     const { classes } = this.props;
     const isProfileRecieved = this.state.username !== ''
@@ -85,9 +92,12 @@ class Statistics extends Component {
     if (isError) {     
       return (
         <div className={classes.root}>
-          <ErrorNotification {...this.state.error} />
+          <NotificationError
+            {...this.state.error}
+            onRefreshClick={this.handleRefreshButton}
+          />
         </div>
-      );      
+      );
     }
 
     if (isProfileRecieved) {
@@ -106,21 +116,30 @@ class Statistics extends Component {
                   <UserInfo {...profile} />
                 </Grid>
                 <Grid item xs={12} sm={8}>
-                  <UserActivityStatistics data={this.state.activity} />
+                  <UserActivityStatistics
+                    onRefreshClick={this.handleRefreshButton}
+                    data={this.state.activity}
+                  />
                 </Grid>
               </Grid>
             </Grid>
           
             <Grid key="row-2" item>
-              <LangStatistics data={this.state.repos}/>
+              <LangStatistics
+                onRefreshClick={this.handleRefreshButton}
+                data={this.state.repos}
+              />
             </Grid>
 
             <Grid key="row-3" item>
-              <RepoStatistics data={this.state.repos}/>
+              <RepoStatistics 
+                onRefreshClick={this.handleRefreshButton}
+                data={this.state.repos}
+              />
             </Grid>
           </Grid>
 
-          <RateLimit className={classes.profile} {...this.state.ratelimit} />
+          {/* <RateLimit className={classes.profile} {...this.state.ratelimit} /> */}
         </div>
       );
     }

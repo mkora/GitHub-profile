@@ -24,6 +24,7 @@ const LangStatistics = (props) => {
           <ChartPie
             title="Bytes per Language"
             data={langPiedData(data, 'byte')}
+            onRefreshClick={props.onRefreshClick}
           />
         </Paper>
       </Grid>
@@ -32,6 +33,7 @@ const LangStatistics = (props) => {
           <ChartPie
             title="Repos per Language"
             data={langPiedData(data, 'repo')}
+            onRefreshClick={props.onRefreshClick}
           />
         </Paper>
       </Grid>
@@ -40,6 +42,7 @@ const LangStatistics = (props) => {
           <ChartPie
             title="Commits per Language"
             data={langPiedData(data, 'commit')}
+            onRefreshClick={props.onRefreshClick}
           />
         </Paper>
       </Grid>
@@ -50,6 +53,7 @@ const LangStatistics = (props) => {
 LangStatistics.propTypes = {
   classes: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
+  onRefreshClick: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(LangStatistics);

@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
 
-const ErrorNotification = (props) => {
+import Typography from 'material-ui/Typography';
+
+import NotFoundError from './NotFoundError';
+
+const NotificationError = (props) => {
   /* eslint-disable indent */
   /* eslint-disable react/jsx-indent-props */
   /* eslint-disable react/jsx-indent */
@@ -19,39 +21,37 @@ const ErrorNotification = (props) => {
     : ''}`;
   console.log(text);
 
+  if (message === 'Not Found') {
+    return (
+      <NotFoundError
+        title="User"
+        onRefreshClick={props.onRefreshClick}
+      />
+    );
+  }
+
   return (
-    <div>
-      {(message === 'Not Found')
-      ? <Typography
-          color="secondary"
-          noWrap
-          paragraph
-          variant="button"
-        >
-          User not found<Button color="primary" href="./">Go home</Button>
-        </Typography>
-      : <Typography
-          color="primary"
-          noWrap
-          paragraph
-          variant="title"
-        >
-          Oops! Something went wrong. Please, try again later
-        </Typography>
-      }
-    </div>
+    <Typography
+      color="primary"
+      noWrap
+      paragraph
+      variant="title"
+    >
+      Oops! Something went wrong. Please, try again later
+    </Typography>
   );
 };
 
-ErrorNotification.propTypes = {
+NotificationError.propTypes = {
+  onRefreshClick: PropTypes.func.isRequired,
   message: PropTypes.string.isRequired,
   documentation_url: PropTypes.string,
   errors: PropTypes.arrayOf('object'),
 };
 
-ErrorNotification.defaultProps = {
+NotificationError.defaultProps = {
   documentation_url: '',
   errors: null,
 };
 
-export default ErrorNotification;
+export default NotificationError;

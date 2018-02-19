@@ -19,22 +19,33 @@ const RepoStatistics = (props) => {
   const { classes, data } = props;
   return (
     <Grid container spacing={16}>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={4}>
+        <Paper className={classes.paper}>
+          <ChartPie
+            title="Bytes per Repo"
+            data={repoPiedData(data, 'byte')}
+            onRefreshClick={props.onRefreshClick}
+          />
+        </Paper>
+      </Grid>
+      <Grid item xs={12} sm={4}>
         <Paper className={classes.paper}>
           <ChartPie
             title="Commits per Repo"
             data={repoPiedData(data, 'commit')}
+            onRefreshClick={props.onRefreshClick}
           />
         </Paper>
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={4}>
         <Paper className={classes.paper}>
           <ChartPie
             title="Stars per Repo"
             data={repoPiedData(data, 'star')}
+            onRefreshClick={props.onRefreshClick}
           />
         </Paper>
-      </Grid>
+      </Grid>      
     </Grid>
   );
 };
@@ -42,6 +53,7 @@ const RepoStatistics = (props) => {
 RepoStatistics.propTypes = {
   classes: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
+  onRefreshClick: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(RepoStatistics);

@@ -1,38 +1,55 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ResponsiveCalendar } from '@nivo/calendar';
+import { withStyles } from 'material-ui/styles';
+import NotFoundError from './NotFoundError';
+
+const styles = theme => ({
+  chart: {
+    height: 285,
+  },
+});
 
 const ChartCalendar = (props) => {
-  const { data } = props; 
+  const { data, title, classes } = props;
+  if (data.length === 0) {
+    return (
+      <NotFoundError
+        title={title}
+        onRefreshClick={props.onRefreshClick}
+      />
+    );
+  }
+
   const fromDate = data[0].day;
   const toDate = data[data.length - 1].day;
 
   return (
-    <div style={{ height: 400 }}>
+    <div className={classes.chart}>
       <ResponsiveCalendar
         data={data}
         from={fromDate}
         to={toDate}
-        emptyColor="#eeeeee"
+        emptyColor="#F5F5F5"
         colors={[
-          '#97e3d5',
-          '#61cdbb',
-          '#e8c1a0',
-          '#faa0a0',
-          '#f47560'
+          '#BBDEFB',
+          '#90CAF9',
+          '#64B5F6',
+          '#42A5F5',
+          '#2196F3',
         ]}
         margin={{
-          top: 100,
-          right: 30,
-          bottom: 60,
-          left: 30
+          top: 40,
+          right: 20,
+          bottom: 45,
+          left: 25
         }}
-        yearSpacing={40}
+        yearSpacing={30}
         yearLegendOffset={10}
-        monthBorderColor="#ffffff"
+        monthBorderColor="#FFFFFF"
         monthLegendOffset={10}
         dayBorderWidth={2}
-        dayBorderColor="#ffffff"
+        dayBorderColor="#FFFFFF"
         legends={[{
           anchor: 'bottom-right',
           direction: 'row',
@@ -48,7 +65,10 @@ const ChartCalendar = (props) => {
 };
 
 ChartCalendar.propTypes = {
-
+  classes: PropTypes.object.isRequired,  
+  data: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+  onRefreshClick: PropTypes.func.isRequired,
 };
 
-export default ChartCalendar;
+export default withStyles(styles)(ChartCalendar);

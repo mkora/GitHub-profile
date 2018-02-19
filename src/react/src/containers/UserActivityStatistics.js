@@ -13,8 +13,8 @@ import { linedData, calendaredData } from '../utils/chartDataFilters'
 
 const styles = theme => ({
   title: {
-    fontSize: '0.875rem',
-    fontWeight: 500
+    fontSize: '1rem',
+    fontWeight: 400
   },
   card: {
     height: '100%',
@@ -83,14 +83,15 @@ class UserActivityStatistics extends Component {
           {
             this.state.isLineChart &&
             <ChartLine
-              title="User Activity"
+              title="Contributions"
               data={linedData(data)}
+              onRefreshClick={this.props.onRefreshClick}
             />
           }
           {
             (!this.state.isLineChart) &&
             <ChartCalendar
-              title="User Activity"
+              title="Contributions"
               data={calendaredData(data)}
             />
           }
@@ -103,6 +104,7 @@ class UserActivityStatistics extends Component {
 UserActivityStatistics.propTypes = {
   classes: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
+  onRefreshClick: PropTypes.func.isRequired,  
 };
 
 export default withStyles(styles)(UserActivityStatistics);
