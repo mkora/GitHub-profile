@@ -22,7 +22,7 @@ const LangStatistics = (props) => {
       <Grid item xs={12} sm={4}>
         <Paper className={classes.paper}>
           <ChartPie
-            title="Bytes per Language"
+            title="Kb per Language"
             data={langPiedData(data, 'byte')}
             onRefreshClick={props.onRefreshClick}
           />

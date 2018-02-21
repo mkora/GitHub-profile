@@ -22,7 +22,7 @@ const RepoStatistics = (props) => {
       <Grid item xs={12} sm={4}>
         <Paper className={classes.paper}>
           <ChartPie
-            title="Bytes per Repo"
+            title="Kb per Repo"
             data={repoPiedData(data, 'byte')}
             onRefreshClick={props.onRefreshClick}
           />

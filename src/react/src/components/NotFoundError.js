@@ -24,17 +24,22 @@ const NotFoundError = (props) => {
         color="textSecondary"
         variant="subheading"
       >
-        {title} not found. Press the refresh button
-        <IconButton
-          className={classes.icon}
-          aria-label="Request data"
-          onClick={props.onRefreshClick}
-        >
-          <RefreshIcon
-            color="action"
-            titleAccess="Refresh"
-          />
-        </IconButton>
+        {title} not found
+        {props.withRefreshButton &&
+          <span>
+            .&nbsp;Press the refresh button
+            <IconButton
+              className={classes.icon}
+              aria-label="Request data"
+              onClick={props.onRefreshClick}
+            >
+              <RefreshIcon
+                color="action"
+                titleAccess="Refresh"
+              />
+            </IconButton>
+          </span>
+        }
       </Typography>
     </div>
   );
@@ -42,8 +47,14 @@ const NotFoundError = (props) => {
 
 NotFoundError.propTypes = {
   classes: PropTypes.object.isRequired,  
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  withRefreshButton: PropTypes.bool,
   onRefreshClick: PropTypes.func.isRequired,
+};
+
+NotFoundError.defaultProps = {
+  withRefreshButton: true,
+  title: 'Data',
 };
 
 export default withStyles(styles)(NotFoundError);
