@@ -1,4 +1,5 @@
 import moment from 'moment';
+import round from './round';
 
 const formatMonth = timestamp =>
   moment
@@ -86,7 +87,7 @@ export const calendaredData = (data) => {
 export const langPiedData = (data, type = 'byte') => {
   const getValue = (type, lang, repo) => {
     if (type === 'byte') {
-      return repo.languages[lang];
+      return repo.languages[lang] / 1000;
     }
     if (type === 'repo') {
       return 1;
@@ -122,7 +123,12 @@ export const langPiedData = (data, type = 'byte') => {
 
   // count others
   const limit = 5;
-  const values = Object.values(langs);
+  const values = Object.values(langs)
+    .map((v) => {
+      // eslint-disable-next-line no-param-reassign
+      v.value = round(v.value, 1);
+      return v;
+    });
   if (values.length > limit) {
     values.sort((a, b) => b.value - a.value);
     values.push({
@@ -145,13 +151,14 @@ export const repoPiedData = (data, type = 'star') => {
       return repo.commits;
     }
     if (type === 'byte') {
-      return Object.keys(repo.languages)
-        .reduce((soFar, k) => repo.languages[k], 0);
+      return Object
+        .keys(repo.languages)
+        .reduce((soFar, k) => repo.languages[k], 0) / 1000;
     }
     return undefined;
   };
 
-  const values = [];
+  let values = [];
   Object.keys(data).forEach((repoName) => {
     const repo = data[repoName];
     const val = getValue(type, repo);
@@ -165,7 +172,13 @@ export const repoPiedData = (data, type = 'star') => {
     });
   });
 
-  const limit = 7;
+  values = values.map((v) => {
+    // eslint-disable-next-line no-param-reassign
+    v.value = round(v.value, 1);
+    return v;
+  });
+
+  const limit = 6;
   if (values.length > limit) {
     values.sort((a, b) => b.value - a.value);
     values.push({
