@@ -31,8 +31,8 @@ const styles = theme => ({
 
 class Statistics extends Component {
   state = {
-    error: {}, // { message, documentation_url, errors }
-    ratelimit: {}, // { limit, remaining }
+    error: {},
+    ratelimit: {},
     username: '',
     profile: {},
     repos: [],
@@ -102,45 +102,45 @@ class Statistics extends Component {
 
     if (isProfileRecieved) {
       return (
-        <div>
-          <Grid
-            container
-            alignItems="stretch"
-            direction="column"
-            justify="flex-start"
-            className={classes.profile}
-          >
-            <Grid key="row-1" item>
-              <Grid container spacing={16}>
-                <Grid item xs={12} sm={4}>
-                  <UserInfo {...profile} />
-                </Grid>
-                <Grid item xs={12} sm={8}>
-                  <UserActivityStatistics
-                    onRefreshClick={this.handleRefreshButton}
-                    data={this.state.activity}
-                  />
-                </Grid>
+        <Grid
+          container
+          alignItems="stretch"
+          direction="column"
+          justify="flex-start"
+          className={classes.profile}
+        >
+          <Grid key="row-1" item>
+            <Grid container spacing={16}>
+              <Grid item xs={12} sm={4}>
+                <UserInfo {...profile} />
+              </Grid>
+              <Grid item xs={12} sm={8}>
+                <UserActivityStatistics
+                  onRefreshClick={this.handleRefreshButton}
+                  data={this.state.activity}
+                />
               </Grid>
             </Grid>
-          
-            <Grid key="row-2" item>
-              <LangStatistics
-                onRefreshClick={this.handleRefreshButton}
-                data={this.state.repos}
-              />
-            </Grid>
-
-            <Grid key="row-3" item>
-              <RepoStatistics 
-                onRefreshClick={this.handleRefreshButton}
-                data={this.state.repos}
-              />
-            </Grid>
+          </Grid>
+        
+          <Grid key="row-2" item>
+            <LangStatistics
+              onRefreshClick={this.handleRefreshButton}
+              data={this.state.repos}
+            />
           </Grid>
 
-          {/* <RateLimit className={classes.profile} {...this.state.ratelimit} /> */}
-        </div>
+          <Grid key="row-3" item>
+            <RepoStatistics 
+              onRefreshClick={this.handleRefreshButton}
+              data={this.state.repos}
+            />
+          </Grid>
+
+          <Grid key="row-4" item>
+            <RateLimit {...this.state.ratelimit} />
+          </Grid>
+        </Grid>
       );
     }
 
