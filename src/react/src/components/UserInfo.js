@@ -18,13 +18,15 @@ import StorageIcon from 'material-ui-icons/Storage';
 import GitHubIcon from '../icons/GitHubIcon';
 
 const styles = theme => ({
+  card: {
+    height: '100%',
+  },
   avatar: {
     width: 100,
     height: 100,
   },
   icon: {
     marginRight: theme.spacing.unit,
-
   },
 });
 
@@ -32,7 +34,7 @@ const UserInfo = (props) => {
   const { classes } = props;
 
   return (
-    <Card>
+    <Card className={classes.card}>
       <CardHeader
         avatar={
           <Avatar
