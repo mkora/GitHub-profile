@@ -6,7 +6,7 @@ import NotFoundError from './NotFoundError';
 
 const styles = theme => ({
   chart: {
-    height: 285,
+    height: 340,
   },
 });
 
@@ -23,7 +23,13 @@ const ChartCalendar = (props) => {
 
   const fromDate = data[0].day;
   const toDate = data[data.length - 1].day;
-
+  const colors = [
+    '#BBDEFB',
+    '#90CAF9',
+    '#64B5F6',
+    '#42A5F5',
+    '#2196F3',
+  ];
   return (
     <div className={classes.chart}>
       <ResponsiveCalendar
@@ -31,21 +37,14 @@ const ChartCalendar = (props) => {
         from={fromDate}
         to={toDate}
         emptyColor="#F5F5F5"
-        colors={[
-          '#BBDEFB',
-          '#90CAF9',
-          '#64B5F6',
-          '#42A5F5',
-          '#2196F3',
-        ]}
+        colors={colors}
         margin={{
           top: 40,
-          right: 20,
-          bottom: 45,
+          right: 10,
+          bottom: 60,
           left: 25
         }}
         yearSpacing={30}
-        yearLegendOffset={10}
         monthBorderColor="#FFFFFF"
         monthLegendOffset={10}
         dayBorderWidth={2}
