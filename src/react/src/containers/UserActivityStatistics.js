@@ -13,8 +13,8 @@ import { linedData, calendaredData } from '../utils/chartDataFilters'
 
 const styles = theme => ({
   title: {
-    fontSize: '1rem',
-    fontWeight: 400
+    fontSize: '0.875rem',
+    fontWeight: 500
   },
   card: {
     height: '100%',
@@ -32,7 +32,7 @@ const styles = theme => ({
 
 class UserActivityStatistics extends Component {
   state = {
-    isLineChart: true,
+    isLineChart: false,
   }
 
   handleSwitchClick = (e) => {
@@ -93,6 +93,7 @@ class UserActivityStatistics extends Component {
             <ChartCalendar
               title="Contributions"
               data={calendaredData(data)}
+              onRefreshClick={this.props.onRefreshClick}
             />
           }
         </CardContent>

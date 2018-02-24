@@ -19,7 +19,7 @@ const RepoStatistics = (props) => {
   const { classes, data } = props;
   return (
     <Grid container spacing={16}>
-      <Grid item xs={12} sm={4}>
+      <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
           <ChartPie
             title="Kb per Repo"
@@ -28,7 +28,7 @@ const RepoStatistics = (props) => {
           />
         </Paper>
       </Grid>
-      <Grid item xs={12} sm={4}>
+      <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
           <ChartPie
             title="Commits per Repo"
@@ -37,7 +37,7 @@ const RepoStatistics = (props) => {
           />
         </Paper>
       </Grid>
-      <Grid item xs={12} sm={4}>
+      <Grid item xs={12} md={4}>
         <Paper className={classes.paper}>
           <ChartPie
             title="Stars per Repo"
