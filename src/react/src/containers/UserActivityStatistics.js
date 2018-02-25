@@ -32,7 +32,7 @@ const styles = theme => ({
 
 class UserActivityStatistics extends Component {
   state = {
-    isLineChart: false,
+    isLineChart: true,
   }
 
   handleSwitchClick = (e) => {

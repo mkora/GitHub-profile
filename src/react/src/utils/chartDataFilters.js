@@ -52,9 +52,14 @@ const formatAddedCalendarDate = (fromTimestamp, nth) =>
 
 export const linedData = (data) => {
   const perMonth = {};
-  Object.keys(data).forEach((timestamp) => {
+
+  Object.keys(data).forEach((timestamp, i) => {
     const date = formatMonth(timestamp);
     const nextDate = formatNextMonth(timestamp);
+    // skip current month name in the previous year
+    if (i === 0 && date !== nextDate) {
+      return;
+    }
     const [curr, next] = sliceWeekData(timestamp, data[timestamp]);
     perMonth[date] = (perMonth[date] || 0) + curr;
     perMonth[nextDate] = (perMonth[nextDate] || 0) + next;
@@ -66,6 +71,7 @@ export const linedData = (data) => {
       y: perMonth[date]
     });
   });
+console.log(activity);
   return activity;
 };
 
