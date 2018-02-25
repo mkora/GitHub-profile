@@ -48,9 +48,10 @@ const ChartLine = (props) => {
           legendOffset: 0,
           legendPosition: 'center'
         }}
-        enableDots
+        enableDots={false}
         enableArea
         animate
+        enableStackTooltip={false}
         motionStiffness={90}
         motionDamping={15}
         legends={[]}
