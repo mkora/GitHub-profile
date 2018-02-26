@@ -28,6 +28,10 @@ const styles = theme => ({
   icon: {
     marginRight: theme.spacing.unit,
   },
+  paragraph: {
+    lineHeight: '1.46em',
+    verticalAlign: 'super',
+  },
 });
 
 const UserInfo = (props) => {
@@ -66,7 +70,9 @@ const UserInfo = (props) => {
             color="primary"
             titleAccess="Member Since"
           />
-          Joined {moment(props.memberSince).format('dddd, MMMM Do YYYY')}
+          <span className={classes.paragraph}>
+            Joined {moment(props.memberSince).format('dddd, MMMM Do YYYY')}
+          </span>
         </Typography>
 
         <Typography paragraph>
@@ -75,7 +81,9 @@ const UserInfo = (props) => {
             color="primary"
             titleAccess="Public Repos"
           />
-          Created {props.reposNumber} repos
+          <span className={classes.paragraph}>
+            Created {props.reposNumber} repos
+          </span>
         </Typography>
 
         { props.company &&
@@ -96,7 +104,9 @@ const UserInfo = (props) => {
               color="primary"
               titleAccess="Location"
             />
-            {props.location}
+            <span className={classes.paragraph}>
+              {props.location}
+            </span>
           </Typography>
         }
       </CardContent>
