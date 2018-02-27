@@ -71,7 +71,6 @@ export const linedData = (data) => {
       y: perMonth[date]
     });
   });
-console.log(activity);
   return activity;
 };
 
@@ -129,12 +128,7 @@ export const langPiedData = (data, type = 'byte') => {
 
   // count others
   const limit = 5;
-  const values = Object.values(langs)
-    .map((v) => {
-      // eslint-disable-next-line no-param-reassign
-      v.value = round(v.value, 1);
-      return v;
-    });
+  let values = Object.values(langs);
   if (values.length > limit) {
     values.sort((a, b) => b.value - a.value);
     values.push({
@@ -145,6 +139,13 @@ export const langPiedData = (data, type = 'byte') => {
         .reduce((soFar, v) => soFar + v.value, 0)
     });
   }
+
+  values = values.map((v) => {
+    // eslint-disable-next-line no-param-reassign
+    v.value = round(v.value, 1);
+    return v;
+  });
+
   return values;
 };
 
@@ -178,12 +179,6 @@ export const repoPiedData = (data, type = 'star') => {
     });
   });
 
-  values = values.map((v) => {
-    // eslint-disable-next-line no-param-reassign
-    v.value = round(v.value, 1);
-    return v;
-  });
-
   const limit = 6;
   if (values.length > limit) {
     values.sort((a, b) => b.value - a.value);
@@ -195,5 +190,12 @@ export const repoPiedData = (data, type = 'star') => {
         .reduce((soFar, v) => soFar + v.value, 0)
     });
   }
+
+  values = values.map((v) => {
+    // eslint-disable-next-line no-param-reassign
+    v.value = round(v.value, 1);
+    return v;
+  });
+
   return values;
 };
