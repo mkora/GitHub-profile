@@ -44,12 +44,20 @@ const getReposInfo = async (username, repo = {}) => {
   const langs = await github.repos.getLanguages({ ...params });
   logger.debug('Call repos.getLanguages(%s)', repo.name, langs);
 
-  // @todo deal with 202
+  // @howto deal with 202 https://developer.github.com/v3/repos/statistics/#a-word-about-caching
   const contributors = await github.repos.getStatsContributors({ ...params });
+  if (contributors.meta.status === '202 Accepted') {
+    logger.debug('Got 202 status code while calling repos.getStatsContributors(%s)');
+    // if call it once again you've got triggered an abusive mechanism (even with a delay)
+  }
   logger.debug('Call repos.getStatsContributors(%s)', repo.name, contributors);
 
-  // @todo deal with 202
+  // @howto deal with 202 https://developer.github.com/v3/repos/statistics/#a-word-about-caching
   const activity = await github.repos.getStatsCommitActivity({ ...params });
+  if (activity.meta.status === '202 Accepted') {
+    logger.debug('Got 202 status code while calling repos.getStatsCommitActivity');
+    // if call it once again you've got triggered an abusive mechanism
+  }
   logger.debug('Call repos.getStatsCommitActivity(%s)', repo.name, activity);
 
   const commits = Array
@@ -122,6 +130,7 @@ module.exports.run = async (req) => {
     user: {
       login: data.login,
       realname: data.name,
+      bio: data.bio,
       profileUrl: data.html_url,
       avatarUrl: data.avatar_url,
       memberSince: data.created_at,
