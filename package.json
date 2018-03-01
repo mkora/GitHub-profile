@@ -7,7 +7,7 @@
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "client": "node ./src/client.js",
     "server": "NODE_CONFIG_DIR=./src/config/ node ./src/app.js",
-    "debug-server": "LOG_LEVEL=debug NODE_CONFIG_DIR=./src/config/ nodemon ./src/app.js",
+    "debug-server": "LOG_LEVEL=info NODE_CONFIG_DIR=./src/config/ nodemon ./src/app.js",
     "lint": "eslint .",
     "test": "echo \"Not yet\" && exit 1"
   },
@@ -15,11 +15,13 @@
   "license": "ISC",
   "dependencies": {
     "@octokit/rest": "^14.0.5",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "config": "^1.29.2",
     "express": "~4.16.0",
     "lodash-es": "^4.17.4",
     "moment": "^2.20.1",
+    "node-cache": "^4.1.1",
     "winston": "^3.0.0-rc1"
   },
   "devDependencies": {
