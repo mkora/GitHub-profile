@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "client": "node ./src/client.js",
+    "client": "node ./src/run-client.js",
     "server": "NODE_CONFIG_DIR=./src/config/ node ./src/app.js",
     "debug-server": "LOG_LEVEL=info NODE_CONFIG_DIR=./src/config/ nodemon ./src/app.js",
     "lint": "eslint .",
