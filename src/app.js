@@ -30,7 +30,7 @@ app.get('/api/clear/:username', controller.clear);
 app.get('/api/limit', controller.limit);
 
 app.use((req, res) => {
-  const message = 'The requested resource couldn\'t be found';
+  const message = 'The requested resource can not be found';
   logger.debug(message);
   res.status(404);
   return res.json({ message });

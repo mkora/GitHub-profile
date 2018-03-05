@@ -75,7 +75,7 @@ const getReposInfo = async (username, repo = {}) => {
   };
 };
 
-exports.run = async (username) => {
+exports.user = async (username) => {
   const token = checkToken();
 
   logger.debug('Call authenticate');
@@ -139,5 +139,27 @@ exports.run = async (username) => {
     activity: reposActivity,
   };
   logger.debug('Returned result for %s', username, result);
+  return result;
+};
+
+exports.limit = async () => {
+  const token = checkToken();
+
+  logger.debug('Call authenticate');
+  await github.authenticate({
+    type: 'oauth',
+    token,
+  });
+
+  const { data } = await github.misc.getRateLimit({});
+  logger.debug('Call misc.getRateLimit', data);
+  const result = {
+    ok: true,
+    ratelimit: {
+      limit: data.rate.limit,
+      remaining: data.rate.remaining,
+    },
+  };
+  logger.debug('Returned result for %s', result);
   return result;
 };

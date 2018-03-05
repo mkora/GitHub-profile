@@ -26,7 +26,7 @@ exports.user = async (req, res) => {
 
     logger.debug('Cache miss: not found %s', key);
 
-    const data = await github.run(username);
+    const data = await github.user(username);
     const status = await cache.setAsync(key, data);
 
     if (status !== true) {
@@ -71,4 +71,17 @@ exports.clear = async (req, res) => {
 
 exports.limit = async (req, res) => {
   logger.info('Retriving from limit/%s');
+  try {
+    const data = await github.limit();
+    return res.json(data);
+  } catch (err) {
+    const code = err.code || 500;
+    const message = errorHandler(err);
+    res.status(code);
+    logger.debug(err);
+    if (code >= 500) {
+      logger.error(err);
+    }
+    return res.json(message);
+  }
 };
