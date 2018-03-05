@@ -13,18 +13,29 @@ const styles = theme => ({
   },
 });
 
-const RateLimit = props => (
-  <Paper className={props.classes.paper}>
-    <Typography align="center">
-      Rate Limit: {props.remaining} / {props.limit}
-    </Typography>
-  </Paper>
+const RateLimit = ({ classes, remaining, limit }) => (
+  <div>
+    {remaining &&
+      <Paper className={classes.paper}>
+        <Typography align="center">
+          Rate Limit: {remaining} / {limit}
+        </Typography>
+      </Paper>
+    }
+  </div>
 );
 
 RateLimit.propTypes = {
-  classes: PropTypes.object.isRequired,
-  limit: PropTypes.string.isRequired,
-  remaining: PropTypes.string.isRequired,
+  classes: PropTypes.shape({
+    paper: PropTypes.string,
+  }).isRequired,
+  limit: PropTypes.string,
+  remaining: PropTypes.string,
+};
+
+RateLimit.defaultProps = {
+  limit: '',
+  remaining: '',
 };
 
 export default withStyles(styles)(RateLimit);

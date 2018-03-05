@@ -20,7 +20,6 @@ const styles = theme => ({
 });
 
 class UserSearch extends Component {
-
   state = {
     username: '',
     error: '',
@@ -97,7 +96,10 @@ class UserSearch extends Component {
 }
 
 UserSearch.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.shape({
+    textField: PropTypes.string,
+    formGroup: PropTypes.string,
+  }).isRequired,
 };
 
 export default withStyles(styles)(UserSearch);

@@ -44,7 +44,7 @@ class UserActivityStatistics extends Component {
   }
 
   render() {
-    const { classes, data } = this.props;
+    const { classes, data, onRefreshClick } = this.props;
 
     return (
       <Card className={classes.card}>
@@ -85,7 +85,7 @@ class UserActivityStatistics extends Component {
             <ChartLine
               title="Contributions"
               data={linedData(data)}
-              onRefreshClick={this.props.onRefreshClick}
+              onRefreshClick={onRefreshClick}
             />
           }
           {
@@ -93,7 +93,7 @@ class UserActivityStatistics extends Component {
             <ChartCalendar
               title="Contributions"
               data={calendaredData(data)}
-              onRefreshClick={this.props.onRefreshClick}
+              onRefreshClick={onRefreshClick}
             />
           }
         </CardContent>
@@ -103,8 +103,14 @@ class UserActivityStatistics extends Component {
 };
 
 UserActivityStatistics.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
+  classes: PropTypes.shape({
+    title: PropTypes.string,
+    card: PropTypes.string,
+    cardHeader: PropTypes.string,
+    cardContent: PropTypes.string,
+    icon: PropTypes.string,
+  }).isRequired,
+  data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   onRefreshClick: PropTypes.func.isRequired,  
 };
 

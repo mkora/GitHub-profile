@@ -42,17 +42,14 @@ class Statistics extends Component {
   handleUsernameSearch = async (username) => {
     try {
       const data = await github(username);
-
       if (data.ok === true) {
         const profile = data.user;
         const {
-          ratelimit,
           repos,
           activity
         } = data;
         this.setState({
           username,
-          ratelimit,
           profile,
           repos,
           activity
@@ -156,7 +153,10 @@ class Statistics extends Component {
 }
 
 Statistics.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.shape({
+    root: PropTypes.string,
+    profile: PropTypes.string,
+  }).isRequired,
 };
 
 export default withRoot(withStyles(styles)(Statistics));

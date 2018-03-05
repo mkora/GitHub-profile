@@ -12,41 +12,43 @@ const styles = theme => ({
     textAlign: 'center',
     marginTop: theme.spacing.unit * 5,
   },
-  icon: {
-  },
 });
 
-const NotFoundError = (props) => {
-  const { classes, title } = props;
-  return (
-    <div className={classes.text}>
-      <Typography
-        color="textSecondary"
-        variant="subheading"
-      >
-        {title} not found
-        {props.withRefreshButton &&
-          <span>
-            .&nbsp;Press the refresh button
-            <IconButton
-              className={classes.icon}
-              aria-label="Request data"
-              onClick={props.onRefreshClick}
-            >
-              <RefreshIcon
-                color="action"
-                titleAccess="Refresh"
-              />
-            </IconButton>
-          </span>
-        }
-      </Typography>
-    </div>
-  );
-};
+const NotFoundError = ({
+  classes,
+  title,
+  withRefreshButton,
+  onRefreshClick
+}) => (
+  <div className={classes.text}>
+    <Typography
+      color="textSecondary"
+      variant="subheading"
+    >
+      {title} not found
+      {withRefreshButton &&
+        <span>
+          .&nbsp;Press the refresh button
+          <IconButton
+            className={classes.icon}
+            aria-label="Request data"
+            onClick={onRefreshClick}
+          >
+            <RefreshIcon
+              color="action"
+              titleAccess="Refresh"
+            />
+          </IconButton>
+        </span>
+      }
+    </Typography>
+  </div>
+);
 
 NotFoundError.propTypes = {
-  classes: PropTypes.object.isRequired,  
+  classes: PropTypes.shape({
+    text: PropTypes.string,
+  }).isRequired,
   title: PropTypes.string,
   withRefreshButton: PropTypes.bool,
   onRefreshClick: PropTypes.func.isRequired,

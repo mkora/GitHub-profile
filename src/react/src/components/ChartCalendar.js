@@ -4,32 +4,37 @@ import { ResponsiveCalendar } from '@nivo/calendar';
 import { withStyles } from 'material-ui/styles';
 import NotFoundError from './NotFoundError';
 
-const styles = theme => ({
+const colors = [
+  '#BBDEFB',
+  '#90CAF9',
+  '#64B5F6',
+  '#42A5F5',
+  '#2196F3',
+];
+
+const styles = () => ({
   chart: {
     height: 340,
   },
 });
 
-const ChartCalendar = (props) => {
-  const { data, title, classes } = props;
+const ChartCalendar = ({
+  data,
+  title,
+  classes,
+  onRefreshClick
+}) => {
   if (data.length === 0) {
     return (
       <NotFoundError
         title={title}
-        onRefreshClick={props.onRefreshClick}
+        onRefreshClick={onRefreshClick}
       />
     );
   }
 
   const fromDate = data[0].day;
   const toDate = data[data.length - 1].day;
-  const colors = [
-    '#BBDEFB',
-    '#90CAF9',
-    '#64B5F6',
-    '#42A5F5',
-    '#2196F3',
-  ];
   return (
     <div className={classes.chart}>
       <ResponsiveCalendar
@@ -64,8 +69,10 @@ const ChartCalendar = (props) => {
 };
 
 ChartCalendar.propTypes = {
-  classes: PropTypes.object.isRequired,  
-  data: PropTypes.array.isRequired,
+  classes: PropTypes.shape({
+    chart: PropTypes.string,
+  }).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired,
   onRefreshClick: PropTypes.func.isRequired,
 };

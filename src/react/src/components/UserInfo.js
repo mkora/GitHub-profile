@@ -115,7 +115,12 @@ const UserInfo = (props) => {
 };
 
 UserInfo.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.shape({
+    card: PropTypes.string,
+    avatar: PropTypes.string,
+    icon: PropTypes.string,
+    paragraph: PropTypes.string,
+  }).isRequired,
   username: PropTypes.string.isRequired,
   realname: PropTypes.string,
   profileUrl: PropTypes.string.isRequired,

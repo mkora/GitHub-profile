@@ -4,19 +4,23 @@ import { ResponsiveLine } from '@nivo/line';
 import { withStyles } from 'material-ui/styles';
 import NotFoundError from './NotFoundError';
 
-const styles = theme => ({
+const styles = () => ({
   chart: {
     height: 250,
   },
 });
 
-const ChartLine = (props) => {
-  const { data, title, classes } = props;
+const ChartLine = ({
+  data,
+  title,
+  classes,
+  onRefreshClick
+}) => {
   if (data.length === 0) {
     return (
       <NotFoundError
         title={title}
-        onRefreshClick={props.onRefreshClick}
+        onRefreshClick={onRefreshClick}
       />
     );
   }
@@ -27,7 +31,7 @@ const ChartLine = (props) => {
         data={[
         {
           id: 'commits',
-          data: props.data
+          data,
         }]}
         margin={{
           top: 10,
@@ -61,8 +65,10 @@ const ChartLine = (props) => {
 };
 
 ChartLine.propTypes = {
-  classes: PropTypes.object.isRequired,  
-  data: PropTypes.array.isRequired,
+  classes: PropTypes.shape({
+    chart: PropTypes.string,
+  }).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired,
   onRefreshClick: PropTypes.func.isRequired,
 };

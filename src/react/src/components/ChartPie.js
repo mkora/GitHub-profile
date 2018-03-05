@@ -5,40 +5,43 @@ import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import NotFoundError from './NotFoundError';
 
-const styles = theme => ({
+const colors = [
+  '#EF5350',
+  '#FFA726',
+  '#FFEE58',
+  '#66BB6A',
+  '#42A5F5',
+  '#5C6BC0',
+  '#7E57C2',
+  '#EC407A',
+  '#29B6F6',
+  '#26C6DA',
+  '#9CCC65',
+  '#FFCA28',
+];
+
+const styles = () => ({
   chart: {
     height: 400,
   },
 });
 
-const ChartPie = (props) => {
-  const { data, title, classes } = props;
+const ChartPie = ({
+  data,
+  title,
+  classes,
+  onRefreshClick
+}) => {
   const isZero = data.every(v => v.value === 0);
-
   if (data.length === 0 || isZero) {
     return (
       <NotFoundError
         title={title}
         withRefreshButton={!isZero}
-        onRefreshClick={props.onRefreshClick}
+        onRefreshClick={onRefreshClick}
       />
     );
   }
-
-  const colors = [
-    '#EF5350',
-    '#FFA726',
-    '#FFEE58',
-    '#66BB6A',
-    '#42A5F5',
-    '#5C6BC0',
-    '#7E57C2',
-    '#EC407A',
-    '#29B6F6',
-    '#26C6DA',
-    '#9CCC65',
-    '#FFCA28',
-  ];
 
   return (
     <div>
@@ -92,8 +95,10 @@ const ChartPie = (props) => {
 };
 
 ChartPie.propTypes = {
-  classes: PropTypes.object.isRequired,  
-  data: PropTypes.array.isRequired,
+  classes: PropTypes.shape({
+    chart: PropTypes.string,
+  }).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired,
   onRefreshClick: PropTypes.func.isRequired,
 };

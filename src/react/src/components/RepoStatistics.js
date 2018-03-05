@@ -15,8 +15,7 @@ const styles = theme => ({
   },
 });
 
-const RepoStatistics = (props) => {
-  const { classes, data } = props;
+const RepoStatistics = ({ classes, data, onRefreshClick }) => {
   return (
     <Grid container spacing={16}>
       <Grid item xs={12} md={4}>
@@ -24,7 +23,7 @@ const RepoStatistics = (props) => {
           <ChartPie
             title="Kb per Repo"
             data={repoPiedData(data, 'byte')}
-            onRefreshClick={props.onRefreshClick}
+            onRefreshClick={onRefreshClick}
           />
         </Paper>
       </Grid>
@@ -33,7 +32,7 @@ const RepoStatistics = (props) => {
           <ChartPie
             title="Commits per Repo"
             data={repoPiedData(data, 'commit')}
-            onRefreshClick={props.onRefreshClick}
+            onRefreshClick={onRefreshClick}
           />
         </Paper>
       </Grid>
@@ -42,7 +41,7 @@ const RepoStatistics = (props) => {
           <ChartPie
             title="Stars per Repo"
             data={repoPiedData(data, 'star')}
-            onRefreshClick={props.onRefreshClick}
+            onRefreshClick={onRefreshClick}
           />
         </Paper>
       </Grid>      
@@ -51,8 +50,10 @@ const RepoStatistics = (props) => {
 };
 
 RepoStatistics.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
+  classes: PropTypes.shape({
+    paper: PropTypes.string,
+  }).isRequired,
+  data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   onRefreshClick: PropTypes.func.isRequired,
 };
 

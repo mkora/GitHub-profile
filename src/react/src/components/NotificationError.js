@@ -29,7 +29,8 @@ const NotificationError = (props) => {
       />
     );
   }
-
+  // @todo add for rate limits 403 Forbidden
+  // eq "message": "API rate limit exceeded for xxx.xxx.xxx.xxx ...etc...",
   return (
     <Typography
       color="primary"
@@ -46,7 +47,7 @@ NotificationError.propTypes = {
   onRefreshClick: PropTypes.func.isRequired,
   message: PropTypes.string.isRequired,
   documentation_url: PropTypes.string,
-  errors: PropTypes.arrayOf('object'),
+  errors: PropTypes.arrayOf(PropTypes.object),
 };
 
 NotificationError.defaultProps = {
