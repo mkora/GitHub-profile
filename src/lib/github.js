@@ -84,8 +84,8 @@ exports.user = async (username) => {
     token,
   });
 
-  const { meta, data } = await github.users.getForUser({ username });
-  logger.debug('Call users.getForUser', meta, data);
+  const { data } = await github.users.getForUser({ username });
+  logger.debug('Call users.getForUser', data);
 
   const repos = await paginate(github.repos.getForUser, { username });
   logger.debug('Call repos.getForUser', repos);
@@ -120,10 +120,6 @@ exports.user = async (username) => {
 
   const result = {
     ok: true,
-    ratelimit: {
-      limit: meta['x-ratelimit-limit'],
-      remaining: meta['x-ratelimit-remaining'],
-    },
     user: {
       login: data.login,
       realname: data.name,
