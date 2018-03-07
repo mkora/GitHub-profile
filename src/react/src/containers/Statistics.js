@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { profile, limit, clear } from '../api/github'
 
+import MenuBar from '../components/MenuBar';
+
 import UserSearch from './UserSearch';
 import UserInfo from '../components/UserInfo';
 import NotificationError from '../components/NotificationError';
@@ -15,6 +17,7 @@ import 'typeface-roboto';
 import { withStyles } from 'material-ui/styles';
 
 import Grid from 'material-ui/Grid';
+import { CircularProgress } from 'material-ui/Progress';
 
 import withRoot from '../withRoot';
 
@@ -72,7 +75,20 @@ class Statistics extends Component {
   }
 
   handleRefreshButton = async () => {
-    console.log('Refresh');
+    const { username } = this.state;
+    await clear(username);
+    await this.handleUsernameSearch(username);
+  }
+
+  handleBackButton = () => {
+    this.setState({
+      searching: false,
+      error: {},
+      username: '',
+      profile: {},
+      repos: [],
+      activity: [],
+    });
   }
 
   render() {
@@ -89,7 +105,7 @@ class Statistics extends Component {
     if (isError) {     
       return (
         <div className={classes.root}>
-          <NotificationError 
+          <NotificationError
             {...this.state.error}
             onRefreshClick={this.handleRefreshButton}
           />
