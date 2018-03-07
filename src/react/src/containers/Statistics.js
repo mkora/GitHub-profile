@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import github from '../api/github'
+import { profile, limit, clear } from '../api/github'
 
 import UserSearch from './UserSearch';
 import UserInfo from '../components/UserInfo';
@@ -41,7 +41,9 @@ class Statistics extends Component {
 
   handleUsernameSearch = async (username) => {
     try {
-      const data = await github(username);
+      const data = await profile(username);
+      const { ratelimit } = await limit();
+   
       if (data.ok === true) {
         const profile = data.user;
         const {
@@ -52,7 +54,8 @@ class Statistics extends Component {
           username,
           profile,
           repos,
-          activity
+          activity,
+          ratelimit,
         });
       } else {
         this.setState({
@@ -68,10 +71,7 @@ class Statistics extends Component {
     }
   }
 
-  /**
-   * TODO
-   */
-  handleRefreshButton = (event) => {
+  handleRefreshButton = async () => {
     console.log('Refresh');
   }
 
@@ -89,7 +89,7 @@ class Statistics extends Component {
     if (isError) {     
       return (
         <div className={classes.root}>
-          <NotificationError
+          <NotificationError 
             {...this.state.error}
             onRefreshClick={this.handleRefreshButton}
           />
