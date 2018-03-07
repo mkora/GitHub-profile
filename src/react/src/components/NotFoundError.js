@@ -17,7 +17,6 @@ const styles = theme => ({
 const NotFoundError = ({
   classes,
   title,
-  withRefreshButton,
   onRefreshClick
 }) => (
   <div className={classes.text}>
@@ -26,7 +25,7 @@ const NotFoundError = ({
       variant="subheading"
     >
       {title} not found
-      {withRefreshButton &&
+      {onRefreshClick !== undefined &&
         <span>
           .&nbsp;Press the refresh button
           <IconButton
@@ -50,13 +49,12 @@ NotFoundError.propTypes = {
     text: PropTypes.string,
   }).isRequired,
   title: PropTypes.string,
-  withRefreshButton: PropTypes.bool,
-  onRefreshClick: PropTypes.func.isRequired,
+  onRefreshClick: PropTypes.func,
 };
 
 NotFoundError.defaultProps = {
-  withRefreshButton: true,
   title: 'Data',
+  onRefreshClick: undefined,
 };
 
 export default withStyles(styles)(NotFoundError);

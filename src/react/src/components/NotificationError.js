@@ -23,14 +23,33 @@ const NotificationError = (props) => {
 
   if (message === 'Not Found') {
     return (
-      <NotFoundError
-        title="User"
-        onRefreshClick={props.onRefreshClick}
-      />
+      <div>
+        <NotFoundError
+          title="User"
+          onRefreshClick={props.onRefreshClick}
+        />
+        <Typography
+          color="textSecondary"
+          variant="subheading"
+        >
+          Please, press the Go Back button
+        </Typography>
+      </div>
     );
   }
-  // @todo add for rate limits 403 Forbidden
-  // eq "message": "API rate limit exceeded for xxx.xxx.xxx.xxx ...etc...",
+  if (message.includes('rate limit exceeded')) {
+    return (
+      <div>
+        <Typography
+          color="textSecondary"
+          variant="subheading"
+        >
+          Rate limit exceeded. Please return later
+        </Typography>
+      </div>
+    );
+  }
+
   return (
     <Typography
       color="primary"
@@ -44,13 +63,14 @@ const NotificationError = (props) => {
 };
 
 NotificationError.propTypes = {
-  onRefreshClick: PropTypes.func.isRequired,
   message: PropTypes.string.isRequired,
   documentation_url: PropTypes.string,
   errors: PropTypes.arrayOf(PropTypes.object),
+  onRefreshClick: PropTypes.func,
 };
 
 NotificationError.defaultProps = {
+  onRefreshClick: undefined,
   documentation_url: '',
   errors: null,
 };

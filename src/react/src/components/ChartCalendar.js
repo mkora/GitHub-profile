@@ -59,7 +59,7 @@ const ChartCalendar = ({
           direction: 'row',
           translateY: 36,
           itemCount: 5,
-          itemWidth: 30,
+          itemWidth: 40,
           itemHeight: 30,
           itemDirection: 'top-to-bottom'
         }]}

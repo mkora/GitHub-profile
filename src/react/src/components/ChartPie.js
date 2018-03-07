@@ -37,8 +37,7 @@ const ChartPie = ({
     return (
       <NotFoundError
         title={title}
-        withRefreshButton={!isZero}
-        onRefreshClick={onRefreshClick}
+        onRefreshClick={!isZero ? onRefreshClick : undefined}
       />
     );
   }

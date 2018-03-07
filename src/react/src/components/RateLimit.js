@@ -15,7 +15,7 @@ const styles = theme => ({
 
 const RateLimit = ({ classes, remaining, limit }) => (
   <div>
-    {remaining &&
+    {remaining > 0 &&
       <Paper className={classes.paper}>
         <Typography align="center">
           Rate Limit: {remaining} / {limit}
@@ -29,8 +29,8 @@ RateLimit.propTypes = {
   classes: PropTypes.shape({
     paper: PropTypes.string,
   }).isRequired,
-  limit: PropTypes.string,
-  remaining: PropTypes.string,
+  limit: PropTypes.number,
+  remaining: PropTypes.number,
 };
 
 RateLimit.defaultProps = {

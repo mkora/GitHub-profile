@@ -30,10 +30,18 @@ const styles = theme => ({
     flexGrow: 1,
     padding: theme.spacing.unit * 2,
   },
+  loading: {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    marginTop: -300,
+    zIndex: 10,
+  },
 });
 
 class Statistics extends Component {
   state = {
+    searching: false,
     error: {},
     ratelimit: {},
     username: '',
@@ -54,6 +62,7 @@ class Statistics extends Component {
           activity
         } = data;
         this.setState({
+          searching: false,
           username,
           profile,
           repos,
@@ -62,12 +71,14 @@ class Statistics extends Component {
         });
       } else {
         this.setState({
+          searching: false,
           username,
           error: { message: 'Unknown error' }
         });
       }
     } catch (error) {
       this.setState({
+        searching: false,
         username,
         error: error.data
       });
@@ -75,12 +86,15 @@ class Statistics extends Component {
   }
 
   handleRefreshButton = async () => {
+    this.setState({
+      searching: true,
+    });
     const { username } = this.state;
     await clear(username);
     await this.handleUsernameSearch(username);
   }
 
-  handleBackButton = () => {
+  handleBackButton = () => { 
     this.setState({
       searching: false,
       error: {},
@@ -104,56 +118,71 @@ class Statistics extends Component {
 
     if (isError) {     
       return (
-        <div className={classes.root}>
-          <NotificationError
-            {...this.state.error}
+        <div>
+          <MenuBar
+            onBackClick={this.handleBackButton}
             onRefreshClick={this.handleRefreshButton}
           />
+          <div className={classes.root}>
+            <NotificationError {...this.state.error} />
+          </div>
         </div>
       );
     }
 
     if (isProfileRecieved) {
       return (
-        <Grid
-          container
-          alignItems="stretch"
-          direction="column"
-          justify="flex-start"
-          className={classes.profile}
-        >
-          <Grid key="row-1" item>
-            <Grid container spacing={16}>
-              <Grid item xs={12} sm={4}>
-                <UserInfo {...profile} />
-              </Grid>
-              <Grid item xs={12} sm={8}>
-                <UserActivityStatistics
-                  onRefreshClick={this.handleRefreshButton}
-                  data={this.state.activity}
-                />
+        <div>
+          <MenuBar
+            onBackClick={this.handleBackButton}
+            onRefreshClick={this.handleRefreshButton}
+          />
+          { this.state.searching && 
+          <CircularProgress
+              size={80} 
+              className={classes.loading} 
+            />
+          }
+          <Grid
+            container
+            alignItems="stretch"
+            direction="column"
+            justify="flex-start"
+            className={classes.profile}
+          >
+            <Grid key="row-1" item>
+              <Grid container spacing={16}>
+                <Grid item xs={12} sm={4}>
+                  <UserInfo {...profile} />
+                </Grid>
+                <Grid item xs={12} sm={8}>
+                  <UserActivityStatistics
+                    onRefreshClick={this.handleRefreshButton}
+                    data={this.state.activity}
+                  />
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        
-          <Grid key="row-2" item>
-            <LangStatistics
-              onRefreshClick={this.handleRefreshButton}
-              data={this.state.repos}
-            />
-          </Grid>
 
-          <Grid key="row-3" item>
-            <RepoStatistics 
-              onRefreshClick={this.handleRefreshButton}
-              data={this.state.repos}
-            />
-          </Grid>
+            <Grid key="row-2" item>
+              <LangStatistics
+                onRefreshClick={this.handleRefreshButton}
+                data={this.state.repos}
+              />
+            </Grid>
 
-          <Grid key="row-4" item>
-            <RateLimit {...this.state.ratelimit} />
+            <Grid key="row-3" item>
+              <RepoStatistics 
+                onRefreshClick={this.handleRefreshButton}
+                data={this.state.repos}
+              />
+            </Grid>
+
+            <Grid key="row-4" item>
+              <RateLimit {...this.state.ratelimit} />
+            </Grid>
           </Grid>
-        </Grid>
+        </div>
       );
     }
 
@@ -172,6 +201,7 @@ Statistics.propTypes = {
   classes: PropTypes.shape({
     root: PropTypes.string,
     profile: PropTypes.string,
+    loading: PropTypes.string,
   }).isRequired,
 };
 
