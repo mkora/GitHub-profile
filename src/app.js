@@ -54,7 +54,6 @@ app.use((err, req, res, next) => {
   return next();
 });
 
-const port = process.env.PORT || 3030;
-app.listen(port, () => {
-  logger.info('Listening on http://localhost:%d/', port);
-});
+app.set('port', process.env.PORT || 3030);
+
+module.exports = app;
