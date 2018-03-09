@@ -6,7 +6,7 @@ const controller = require('./controllers/controller.js');
 const app = express();
 
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
 }));
 app.use(bodyParser.json());
 
@@ -19,7 +19,7 @@ app.get('/pulse', (req, res) => {
   res.status(200);
   return res.json({
     ok: true,
-    data: 'It works!'
+    data: 'It works!',
   });
 });
 

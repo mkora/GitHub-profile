@@ -1,14 +1,14 @@
 const {
   createLogger,
   format,
-  transports
+  transports,
 } = require('winston');
 
 const {
   splat,
   combine,
   label,
-  prettyPrint
+  prettyPrint,
 } = format;
 
 const logger = createLogger({
@@ -16,11 +16,11 @@ const logger = createLogger({
   format: combine(
     splat(),
     label({ label: 'GITHUB' }),
-    prettyPrint()
+    prettyPrint(),
   ),
   transports: [
     new transports.Console(),
-  ]
+  ],
 });
 
 module.exports = logger;

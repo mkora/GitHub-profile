@@ -8,7 +8,7 @@
     "client": "node ./src/run-client.js",
     "server": "NODE_CONFIG_DIR=./src/config/ node ./src/app.js",
     "debug-server": "LOG_LEVEL=debug NODE_CONFIG_DIR=./src/config/ nodemon ./src/app.js",
-    "lint": "eslint .",
+    "lint": "node_modules/eslint/bin/eslint.js .",
     "test": "echo \"Not yet\" && exit 1"
   },
   "author": "mkora",
@@ -27,11 +27,11 @@
   },
   "devDependencies": {
     "concurrently": "^3.5.1",
-    "eslint": "^4.16.0",
+    "eslint": "^4.18.2",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-react": "^7.7.0",
     "nodemon": "^1.14.11"
   }
 }

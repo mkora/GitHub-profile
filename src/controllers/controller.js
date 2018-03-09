@@ -9,7 +9,7 @@ const NodeCache = require('node-cache');
 promise.promisifyAll(NodeCache.prototype);
 const cache = new NodeCache({
   stdTTL: cacheConfig.localDataLifetime,
-  checkperiod: cacheConfig.localDataCheckperiod
+  checkperiod: cacheConfig.localDataCheckperiod,
 });
 
 exports.user = async (req, res) => {

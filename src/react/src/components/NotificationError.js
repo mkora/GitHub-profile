@@ -6,9 +6,6 @@ import Typography from 'material-ui/Typography';
 import NotFoundError from './NotFoundError';
 
 const NotificationError = (props) => {
-  /* eslint-disable indent */
-  /* eslint-disable react/jsx-indent-props */
-  /* eslint-disable react/jsx-indent */
   const { message } = props;
   const text = `Reason: ${message}
     ${(props.documentation_url)

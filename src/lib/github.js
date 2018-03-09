@@ -37,7 +37,7 @@ const getReposInfo = async (username, repo = {}) => {
     owner: username,
     repo: repo.name,
     headers: {
-      accept: 'application/vnd.github.v3+json'
+      accept: 'application/vnd.github.v3+json',
     },
   };
 
