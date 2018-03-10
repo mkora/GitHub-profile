@@ -9,7 +9,7 @@
     "server": "NODE_CONFIG_DIR=./src/config/ node ./run-server.js",
     "debug-server": "LOG_LEVEL=debug NODE_CONFIG_DIR=./src/config/ nodemon ./run-server.js",
     "lint": "node_modules/eslint/bin/eslint.js .",
-    "test": "NODE_CONFIG_DIR=./src/config/ mocha --timeout 10000 ./src/test/"
+    "test": "NODE_CONFIG_DIR=./src/config/ nyc mocha --timeout 10000 ./src/test/"
   },
   "author": "mkora",
   "license": "ISC",
@@ -35,6 +35,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "mocha": "^5.0.4",
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.14.11",
+    "nyc": "^11.4.1"
   }
 }
