@@ -1,4 +1,4 @@
-# GitHub User Profile Statistics
+# User Stats for GitHub
 
 Node.js, Express, React, Material-UI, Mocha
 
@@ -12,17 +12,17 @@ A tool for visualization of GitHub user profile statistics
 
 - TTL for node-cache is set to 24 hours to keep user's profile
 
-- Frontend uses [React components](https://material-ui-next.com) that implement [Google's Material Design](https://material.io) (Note: Icons is [here]([https://material.io/icons/]))
+- Frontend uses [React components](https://material-ui-next.com) that implement [Google's Material Design](https://material.io) (Note: Icons is in [here](https://material.io/icons/))
 
-- Used concurrently to start both servers (express and create-react-app) by running npm start (Note: proxy is set in here `src/react/package.json`; Express default value is `http://localhost:3030`)
+- Used concurrently library to start both servers (express and create-react-app) by running npm start (Note: proxy is set in here **src/react/package.json** and a default value is **http://localhost:3030**)
 
 - Added Mocha and Chai for backend tests
 
-- For test coverage used Istanbul (Note: **nyc** is its command line interface)
+- For test coverage used Istanbul (Note: nyc is its CLI)
 
 ## See Me
 
-[pic is here]
+![My Stats for GitHub](https://user-images.githubusercontent.com/31717889/37631394-df0549c0-2bbf-11e8-8ef0-a4b73b9d1f62.png)
 
 ## Quick Start
 
@@ -56,7 +56,7 @@ A tool for visualization of GitHub user profile statistics
   $ npm run debug-server
   ```
  
-6. Also run:
+6. Also npm run:
 
   ```
   $ npm test
@@ -82,7 +82,7 @@ A tool for visualization of GitHub user profile statistics
 
   Note: Use GET method to retrieve data
 
-  Note: For a local copy call http://localhost:3030/api/
+  Note: For a local copy browse to http://localhost:3030/api/
   
   - Call **user/:username** to GitHub user profile info
   
