@@ -12,7 +12,7 @@
     "test": "NODE_CONFIG_DIR=./src/config/ nyc mocha --timeout 10000 ./src/test/"
   },
   "author": "mkora",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@octokit/rest": "^14.0.5",
     "bluebird": "^3.5.1",
