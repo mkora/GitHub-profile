@@ -5,7 +5,7 @@ import { withStyles } from 'material-ui/styles';
 
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
-import RefreshIcon from 'material-ui-icons/Refresh';
+import RefreshIcon from '@material-ui/icons/Refresh';
 
 const styles = theme => ({
   text: {

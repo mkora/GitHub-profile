@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardHeader, CardContent } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
-import TodayIcon from 'material-ui-icons/Today';
-import TimelineIcon from 'material-ui-icons/Timeline';
+import TodayIcon from '@material-ui/icons/Today';
+import TimelineIcon from '@material-ui/icons/Timeline';
 
 import ChartLine from '../components/ChartLine';
 import ChartCalendar from '../components/ChartCalendar';

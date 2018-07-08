@@ -11,10 +11,10 @@ import Avatar from 'material-ui/Avatar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 
-import BusinessIcon from 'material-ui-icons/Business';
-import EventNoteIcon from 'material-ui-icons/EventNote';
-import LocationOnIcon from 'material-ui-icons/LocationOn';
-import StorageIcon from 'material-ui-icons/Storage';
+import BusinessIcon from '@material-ui/icons/Business';
+import EventNoteIcon from '@material-ui/icons/EventNote';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import StorageIcon from '@material-ui/icons/Storage';
 import GitHubIcon from '../icons/GitHubIcon';
 
 const styles = theme => ({

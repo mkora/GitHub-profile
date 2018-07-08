@@ -149,6 +149,7 @@ class Statistics extends Component {
             direction="column"
             justify="flex-start"
             className={classes.profile}
+            spacing={16}
           >
             <Grid key="row-1" item>
               <Grid container spacing={16}>
