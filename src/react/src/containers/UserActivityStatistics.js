@@ -1,9 +1,13 @@
 import React, { Component }  from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from 'material-ui/styles';
-import Card, { CardHeader, CardContent } from 'material-ui/Card';
-import IconButton from 'material-ui/IconButton';
+import { withStyles } from '@material-ui/core/styles';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  IconButton,
+} from '@material-ui/core';
 import TodayIcon from '@material-ui/icons/Today';
 import TimelineIcon from '@material-ui/icons/Timeline';
 

@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import 'typeface-roboto';
+import { withStyles } from '@material-ui/core/styles';
+import {
+  Grid,
+  CircularProgress,
+} from '@material-ui/core';
+
 import { profile, limit, clear } from '../api/github'
 
 import MenuBar from '../components/MenuBar';
-
-import UserSearch from './UserSearch';
 import UserInfo from '../components/UserInfo';
 import NotificationError from '../components/NotificationError';
 import RateLimit from '../components/RateLimit';
-import UserActivityStatistics from './UserActivityStatistics';
 import RepoStatistics from '../components/RepoStatistics';
 import LangStatistics from '../components/LangStatistics';
-
-import 'typeface-roboto';
-import { withStyles } from 'material-ui/styles';
-
-import Grid from 'material-ui/Grid';
-import { CircularProgress } from 'material-ui/Progress';
+import UserSearch from './UserSearch';
+import UserActivityStatistics from './UserActivityStatistics';
 
 import withRoot from '../withRoot';
 

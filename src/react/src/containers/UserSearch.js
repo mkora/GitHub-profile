@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 
-import { FormGroup, FormHelperText } from 'material-ui/Form'
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import { CircularProgress } from 'material-ui/Progress';
+import { withStyles } from '@material-ui/core/styles';
+import {
+  FormGroup,
+  FormHelperText,
+  TextField,
+  Button,
+  CircularProgress
+} from '@material-ui/core';
 
 const styles = theme => ({
   textField: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ResponsiveLine } from '@nivo/line';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import NotFoundError from './NotFoundError';
 
 const styles = () => ({

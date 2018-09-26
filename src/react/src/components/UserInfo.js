@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 
 import moment from 'moment';
 
-import { withStyles } from 'material-ui/styles';
-
-import { Card, CardHeader, CardContent } from 'material-ui';
-
-import Avatar from 'material-ui/Avatar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
+import { withStyles } from '@material-ui/core/styles';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  Avatar,
+  Typography,
+  IconButton,
+} from '@material-ui/core';
 
 import BusinessIcon from '@material-ui/icons/Business';
 import EventNoteIcon from '@material-ui/icons/EventNote';
