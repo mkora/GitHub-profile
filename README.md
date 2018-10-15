@@ -1,4 +1,4 @@
-# User GitHub Numbers
+# GitHub User Numbers
 
 Node.js, Express, React, Material-UI, Mocha
 
