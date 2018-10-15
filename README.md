@@ -1,4 +1,4 @@
-# User Stats for GitHub
+# User GitHub Numbers
 
 Node.js, Express, React, Material-UI, Mocha
 
